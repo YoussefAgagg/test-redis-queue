@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class Consume {
+public class ConsumeRedisQueue {
     private final RedisTemplate<String, ApplicationRequest> redisTemplate;
 
     @Async
     @Scheduled(fixedRate = 1000)
-    public void processDelayedAutomationRules(){
-        log.info(Thread.currentThread().getName()+":");
-        log.info("applicatin recived :{}",redisTemplate.boundListOps("application-queue").rightPop());
+    public void processDelayedAutomationRules() {
+        log.info(Thread.currentThread().getName() + ":");
+        log.info("application recived :{}", redisTemplate.boundListOps("application-queue").rightPop());
 
     }
 }
