@@ -1,0 +1,12 @@
+spring:
+  redis:
+    host: localhost
+    port: 6397
+
+server:
+  port: 8888
+
+
+
+
+
