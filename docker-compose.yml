@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  redis:
+    image: bitnami/redis
+    container_name: redis
+    restart: unless-stopped
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+  test-redis-queue:
+    build: .
+    platform: linux/amd64
+    restart: on-failure
+    depends_on:
+      - redis
+    ports:
+      - "8888:8888"
+volumes:
+  redis_data:
+    driver: local
